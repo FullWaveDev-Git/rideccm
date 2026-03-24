@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="lvCwIvj5ePqW5UfC5DyeB_LwEMLtjNhMzYAKjQq4G7M" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory | Clinton County Motorsports — Wilmington, OH</title>
+  <meta name="description" content="Browse new, pre-owned, and clearance powersports inventory at Clinton County Motorsports in Wilmington, OH. Can-Am, Polaris, Yamaha, Kawasaki, KTM, Triumph, Suzuki and more.">
+  <link rel="canonical" href="https://rideccm.com/inventory">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/page.css">
+  <style>
+    /* ── Filters ── */
+    .inv-controls { background: var(--bg-2); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 1.25rem 0; position: sticky; top: var(--nav-h); z-index: 40; }
+    .inv-controls-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    .inv-tabs { display: flex; gap: 0.25rem; background: rgba(255,255,255,0.05); padding: 0.25rem; border-radius: 8px; }
+    .inv-tab { padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; color: rgba(255,255,255,0.5); background: transparent; }
+    .inv-tab.active { background: var(--red); color: #fff; }
+    .inv-tab:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
+    .inv-tab .count { opacity: 0.65; font-size: 0.7rem; margin-left: 0.25rem; }
+    .inv-search { flex: 1; min-width: 200px; max-width: 320px; padding: 0.5rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.85rem; outline: none; }
+    .inv-search::placeholder { color: rgba(255,255,255,0.35); }
+    .inv-search:focus { border-color: var(--red); }
+    .inv-select { padding: 0.5rem 0.875rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.8rem; outline: none; cursor: pointer; min-width: 120px; }
+    .inv-select:focus { border-color: var(--red); }
+    .inv-select option { background: #1a1a1a; }
+    .inv-filter-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; width: 100%; }
+    .inv-filter-divider { width: 100%; height: 0; border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 0.1rem 0; }
+    .inv-clear-btn { padding: 0.5rem 0.875rem; background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: rgba(255,255,255,0.45); font-size: 0.75rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .inv-clear-btn:hover { border-color: var(--red); color: var(--red); }
+    @media (max-width: 600px) {
+      .inv-controls-inner { gap: 0.6rem; }
+      .inv-filter-row { gap: 0.5rem; }
+      .inv-tabs { width: 100%; justify-content: space-between; }
+      .inv-tab  { flex: 1; text-align: center; padding: 0.45rem 0.5rem; }
+      .inv-search { min-width: 0; max-width: 100%; width: 100%; flex: 1 1 100%; }
+      .inv-select { flex: 1; min-width: 0; }
+    }
+
+    /* ── Results bar ── */
+    .inv-results-bar { max-width: 1200px; margin: 0 auto; padding: 1.25rem 1.5rem 0; display: flex; align-items: center; justify-content: space-between; }
+    .inv-count { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+
+    /* ── Grid ── */
+    .inv-grid-wrap { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+    .inv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 1024px) { .inv-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .inv-grid { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
+    .inv-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, border-color 0.2s; text-decoration: none; color: inherit; }
+    .inv-card:hover { transform: translateY(-3px); border-color: rgba(234,47,23,0.35); }
+    .inv-card-img { position: relative; aspect-ratio: 4/3; background: rgba(255,255,255,0.03); overflow: hidden; }
+    .inv-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .inv-card:hover .inv-card-img img { transform: scale(1.04); }
+    .inv-card-img-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: rgba(255,255,255,0.12); font-size: 3rem; }
+    .inv-card-badges { position: absolute; top: 0.6rem; left: 0.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .inv-card-badge { padding: 0.2rem 0.55rem; border-radius: 4px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; backdrop-filter: blur(8px); }
+    .badge-new       { background: rgba(59,130,246,.8);  color: #fff; }
+    .badge-used      { background: rgba(245,158,11,.8);  color: #fff; }
+    .badge-clearance { background: rgba(234,47,23,.85);  color: #fff; }
+    .badge-soon      { background: rgba(168,85,247,.8);  color: #fff; }
+    .badge-pending   { background: rgba(234,179,8,.85);  color: #000; }
+    .badge-sold      { background: rgba(80,80,80,.9);    color: #fff; }
+    .inv-card-body { padding: 1rem 1.1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .inv-card-year { font-size: 0.72rem; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .inv-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; line-height: 1.15; color: #fff; margin-bottom: 0.25rem; }
+    .inv-card-trim { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 0.6rem; }
+    .inv-card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .inv-card-chip { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); }
+    .inv-card-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #fff; line-height: 1; margin-top: auto; }
+    .inv-card-msrp  { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-decoration: line-through; }
+    .inv-card-price-call { font-size: 0.85rem; color: rgba(255,255,255,0.45); font-style: italic; margin-top: auto; }
+    .inv-card-btn { display: block; text-align: center; margin-top: 0.85rem; padding: 0.65rem; background: var(--red); color: #fff; border-radius: 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; transition: opacity 0.2s; }
+    .inv-card:hover .inv-card-btn { opacity: 0.88; }
+
+    /* ── Pagination ── */
+    .inv-pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0 0 4rem; }
+    .inv-page-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .inv-page-btn:hover { border-color: var(--red); color: #fff; }
+    .inv-page-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+    .inv-page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* ── Empty / Loading ── */
+    .inv-empty { text-align: center; padding: 4rem 2rem; grid-column: 1/-1; }
+    .inv-skeleton { background: rgba(255,255,255,0.06); border-radius: 12px; aspect-ratio: 4/3; animation: skpulse 1.4s ease-in-out infinite; }
+    @keyframes skpulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  </style>
+  <script src="https://fullwave-dashboard.vercel.app/tracker.js" data-site="f95255a3-6759-41ef-9c92-7c57276957c4" defer></script>
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo"><img src="https://www.rideccm.com/images/clinton-county-ms-logo.png" alt="Clinton County Motorsports" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-logo-text" style="display:none">CCM</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu" role="list">
+      <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+      <li class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">Inventory <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="none"><a href="/inventory" role="menuitem">All Inventory</a></li>
+          <li role="none"><a href="/inventory#new" role="menuitem">New Units</a></li>
+          <li role="none"><a href="/inventory#used" role="menuitem">Pre-Owned</a></li>
+          <li role="none"><a href="/inventory#clearance" role="menuitem">Clearance</a></li>
+          <li role="none"><a href="/get-a-quote" role="menuitem">Get A Quote</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="/promotions" class="nav-link">Promotions</a></li>
+      <li class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="none"><a href="/services" role="menuitem">Service Dept.</a></li>
+          <li role="none"><a href="/schedule-service" role="menuitem">Schedule Service</a></li>
+          <li role="none"><a href="/parts" role="menuitem">Parts &amp; Accessories</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="/financing" class="nav-link">Financing</a></li>
+      <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="/contact" class="nav-link nav-cta-link">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Inventory</span>
+    </nav>
+    <h1>Our Inventory</h1>
+    <div class="red-divider"></div>
+    <p>New, Pre-Owned &amp; Clearance powersports from the brands you love — all under one roof in Wilmington, OH.</p>
+  </div>
+</section>
+
+<!-- Alert bar -->
+<div style="background:var(--red);padding:0.85rem 0;text-align:center;" role="alert">
+  <div class="container">
+    <p style="margin:0;font-size:0.875rem;font-weight:600;color:#fff;">Call or text <a href="tel:9372832220" style="color:#fff;text-decoration:underline;font-weight:700;">(937) 283-2220</a> to verify availability before visiting.</p>
+  </div>
+</div>
+
+<!-- Sticky filter bar -->
+<div class="inv-controls" id="inv-controls">
+  <div class="inv-controls-inner">
+    <!-- Row 1: Condition tabs + search + sort -->
+    <div class="inv-filter-row">
+      <div class="inv-tabs" id="inv-tabs">
+        <button class="inv-tab active" data-cond="all">All <span class="count" id="cnt-all"></span></button>
+        <button class="inv-tab" data-cond="new">New <span class="count" id="cnt-new"></span></button>
+        <button class="inv-tab" data-cond="used">Pre-Owned <span class="count" id="cnt-used"></span></button>
+        <button class="inv-tab" data-cond="clearance">Clearance <span class="count" id="cnt-clearance"></span></button>
+      </div>
+      <input type="search" class="inv-search" id="inv-search" placeholder="Search make, model, stock #…" aria-label="Search inventory">
+      <select class="inv-select" id="inv-sort" aria-label="Sort">
+        <option value="newest">Newest First</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="year-desc">Year: Newest</option>
+        <option value="year-asc">Year: Oldest</option>
+      </select>
+    </div>
+    <!-- Divider -->
+    <hr class="inv-filter-divider">
+    <!-- Row 2: Attribute filters -->
+    <div class="inv-filter-row">
+      <select class="inv-select" id="inv-brand" aria-label="Filter by brand">
+        <option value="">All Brands</option>
+      </select>
+      <select class="inv-select" id="inv-model" aria-label="Filter by model">
+        <option value="">All Models</option>
+      </select>
+      <select class="inv-select" id="inv-category" aria-label="Filter by category">
+        <option value="">All Categories</option>
+      </select>
+      <select class="inv-select" id="inv-year" aria-label="Filter by year">
+        <option value="">All Years</option>
+      </select>
+      <select class="inv-select" id="inv-price" aria-label="Filter by price">
+        <option value="">Any Price</option>
+        <option value="0-4999">Under $5,000</option>
+        <option value="5000-9999">$5,000 – $10,000</option>
+        <option value="10000-14999">$10,000 – $15,000</option>
+        <option value="15000-19999">$15,000 – $20,000</option>
+        <option value="20000-29999">$20,000 – $30,000</option>
+        <option value="30000-49999">$30,000 – $50,000</option>
+        <option value="50000-999999">$50,000+</option>
+      </select>
+      <button class="inv-clear-btn" id="inv-clear" onclick="clearFilters()">Clear Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- Results count -->
+<div class="inv-results-bar">
+  <p class="inv-count" id="inv-count">Loading inventory…</p>
+</div>
+
+<!-- Grid -->
+<div class="inv-grid-wrap">
+  <div class="inv-grid" id="inv-grid">
+    <!-- skeletons while loading -->
+    <div class="inv-skeleton"></div>
+    <div class="inv-skeleton"></div>
+    <div class="inv-skeleton"></div>
+    <div class="inv-skeleton"></div>
+    <div class="inv-skeleton"></div>
+    <div class="inv-skeleton"></div>
+  </div>
+  <div class="inv-pagination" id="inv-pagination"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://www.rideccm.com/images/clinton-county-ms-logo.png" alt="Clinton County Motorsports" class="footer-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="footer-logo-text" style="display:none">CCM</span>
+        <p>Clinton County Motorsports is your premier powersports dealership in Wilmington, OH — serving southwest Ohio since day one.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/ClintonCountyMotorsports" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Inventory</h4>
+        <ul>
+          <li><a href="/inventory">All Inventory</a></li>
+          <li><a href="/inventory#new">New Units</a></li>
+          <li><a href="/inventory#used">Pre-Owned</a></li>
+          <li><a href="/inventory#clearance">Clearance</a></li>
+          <li><a href="/get-a-quote">Get A Quote</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services">Service Dept.</a></li>
+          <li><a href="/schedule-service">Schedule Service</a></li>
+          <li><a href="/parts">Parts &amp; Accessories</a></li>
+          <li><a href="/financing">Financing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/promotions">Promotions</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/hours">Hours &amp; Location</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="yr"></span> Clinton County Motorsports. All rights reserved.</p>
+      <p>6002 U.S. 68 N, Wilmington, OH 45177 &bull; <a href="tel:9372832220">(937) 283-2220</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── Supabase config ── */
+const SUPABASE_URL     = 'https://xzevjgfpskptuzjuooaa.supabase.co';
+const SUPABASE_ANON    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6ZXZqZ2Zwc2twdHV6anVvb2FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MjY2MDQsImV4cCI6MjA4OTUwMjYwNH0.2Mtm8kRRnvcIsp9VnHL0KTq8KTuFdsBZ-rFTm-i4BhY';
+/* Set this to the website_id from your Supabase dashboard after registering the CCM site */
+const WEBSITE_ID       = 'f95255a3-6759-41ef-9c92-7c57276957c4';
+
+const PER_PAGE = 18;
+let allVehicles = [];
+let filtered    = [];
+let page        = 1;
+let activeTab   = 'all';
+
+/* ── Fetch all inventory ── */
+async function fetchInventory() {
+  try {
+    const url = WEBSITE_ID === 'YOUR_CCM_WEBSITE_ID'
+      ? `${SUPABASE_URL}/rest/v1/inventory?select=*&order=created_at.desc`
+      : `${SUPABASE_URL}/rest/v1/inventory?website_id=eq.${WEBSITE_ID}&select=*&order=created_at.desc`;
+    const res  = await fetch(url, {
+      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+    });
+    allVehicles = await res.json();
+    if (!Array.isArray(allVehicles)) allVehicles = [];
+  } catch(e) {
+    allVehicles = [];
+  }
+  buildFilters();
+  applyFilters();
+}
+
+/* ── Build brand + category + year selects ── */
+function buildFilters() {
+  const makes = [...new Set(allVehicles.map(v => v.make))].sort();
+  const cats  = [...new Set(allVehicles.map(v => v.category).filter(Boolean))].sort();
+  const years = [...new Set(allVehicles.map(v => v.year).filter(Boolean))].sort((a,b) => b - a);
+  const bSel  = document.getElementById('inv-brand');
+  const cSel  = document.getElementById('inv-category');
+  const ySel  = document.getElementById('inv-year');
+  makes.forEach(m => { const o = document.createElement('option'); o.value = m; o.textContent = m; bSel.appendChild(o); });
+  cats.forEach(c  => { const o = document.createElement('option'); o.value = c; o.textContent = c; cSel.appendChild(o); });
+  years.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; ySel.appendChild(o); });
+  updateModelDropdown('');
+
+  /* counts */
+  document.getElementById('cnt-all').textContent       = `(${allVehicles.length})`;
+  document.getElementById('cnt-new').textContent        = `(${allVehicles.filter(v=>v.condition==='new').length})`;
+  document.getElementById('cnt-used').textContent       = `(${allVehicles.filter(v=>v.condition==='used').length})`;
+  document.getElementById('cnt-clearance').textContent  = `(${allVehicles.filter(v=>v.condition==='clearance').length})`;
+}
+
+/* ── Update model dropdown based on selected brand ── */
+function updateModelDropdown(brand) {
+  const mSel = document.getElementById('inv-model');
+  const current = mSel.value;
+  mSel.innerHTML = '<option value="">All Models</option>';
+  const models = [...new Set(
+    allVehicles.filter(v => !brand || v.make === brand).map(v => v.model).filter(Boolean)
+  )].sort();
+  models.forEach(m => { const o = document.createElement('option'); o.value = m; o.textContent = m; mSel.appendChild(o); });
+  if (models.includes(current)) mSel.value = current;
+}
+
+/* ── Clear all filters ── */
+function clearFilters() {
+  document.getElementById('inv-search').value = '';
+  document.getElementById('inv-brand').value  = '';
+  document.getElementById('inv-model').value  = '';
+  document.getElementById('inv-category').value = '';
+  document.getElementById('inv-year').value   = '';
+  document.getElementById('inv-price').value  = '';
+  document.getElementById('inv-sort').value   = 'newest';
+  updateModelDropdown('');
+  applyFilters();
+}
+
+/* ── Fuzzy match: finds results even with missing/mistyped letters ── */
+function fuzzyMatch(needle, haystack) {
+  if (haystack.includes(needle)) return true;
+  let hi = 0;
+  for (let ni = 0; ni < needle.length; ni++) {
+    while (hi < haystack.length && haystack[hi] !== needle[ni]) hi++;
+    if (hi >= haystack.length) return false;
+    hi++;
+  }
+  return true;
+}
+
+/* ── Apply filters + sort ── */
+function applyFilters() {
+  const q     = document.getElementById('inv-search').value.toLowerCase();
+  const brand = document.getElementById('inv-brand').value;
+  const model = document.getElementById('inv-model').value;
+  const cat   = document.getElementById('inv-category').value;
+  const year  = document.getElementById('inv-year').value;
+  const price = document.getElementById('inv-price').value;
+  const sort  = document.getElementById('inv-sort').value;
+
+  filtered = allVehicles.filter(v => {
+    if (activeTab !== 'all' && v.condition !== activeTab) return false;
+    if (brand && v.make !== brand) return false;
+    if (model && v.model !== model) return false;
+    if (cat   && v.category !== cat) return false;
+    if (year  && String(v.year) !== year) return false;
+    if (price) {
+      const [min, max] = price.split('-').map(Number);
+      const p = v.price || 0;
+      if (p < min || p > max) return false;
+    }
+    if (q) {
+      const hay = [v.make, v.model, v.trim, v.year, v.stock_number, v.color, v.category]
+        .filter(Boolean).join(' ').toLowerCase();
+      if (!fuzzyMatch(q, hay)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sort === 'price-asc')  return (a.price||0) - (b.price||0);
+    if (sort === 'price-desc') return (b.price||0) - (a.price||0);
+    if (sort === 'year-desc')  return b.year - a.year;
+    return new Date(b.created_at) - new Date(a.created_at); // newest
+  });
+
+  page = 1;
+  renderGrid();
+}
+
+/* ── Render grid ── */
+function renderGrid() {
+  const grid = document.getElementById('inv-grid');
+  const start = (page - 1) * PER_PAGE;
+  const slice = filtered.slice(start, start + PER_PAGE);
+
+  document.getElementById('inv-count').textContent =
+    filtered.length === 0 ? 'No vehicles found'
+    : `Showing ${start + 1}–${Math.min(start + PER_PAGE, filtered.length)} of ${filtered.length} vehicle${filtered.length !== 1 ? 's' : ''}`;
+
+  if (slice.length === 0) {
+    grid.innerHTML = `<div class="inv-empty" style="grid-column:1/-1;">
+      <p style="font-size:2.5rem;margin-bottom:1rem;">🏍</p>
+      <h3 style="color:#fff;margin-bottom:0.5rem;">No vehicles found</h3>
+      <p style="color:rgba(255,255,255,0.45);">Try adjusting your filters.</p>
+    </div>`;
+    document.getElementById('inv-pagination').innerHTML = '';
+    return;
+  }
+
+  grid.innerHTML = slice.map(cardHTML).join('');
+  renderPagination();
+}
+
+/* ── Card HTML ── */
+function cardHTML(v) {
+  const condBadge = { new:'badge-new New', used:'badge-used Pre-Owned', clearance:'badge-clearance Clearance' };
+  const statusBadge = { 'coming-soon':'badge-soon Coming Soon','sale-pending':'badge-pending Sale Pending','sold':'badge-sold Sold' };
+  const cBadge = condBadge[v.condition] || 'badge-new New';
+  const sBadge = v.status && v.status !== 'on-site' ? (statusBadge[v.status]||'') : '';
+
+  const img = v.image_url
+    ? `<img src="${v.image_url}" alt="${v.year} ${v.make} ${v.model}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'inv-card-img-placeholder\\'>🏍</div>'">`
+    : `<div class="inv-card-img-placeholder">🏍</div>`;
+
+  const priceHtml = v.price
+    ? `<div class="inv-card-price">$${Number(v.price).toLocaleString()}</div>
+       ${v.msrp && v.msrp > v.price ? `<div class="inv-card-msrp">MSRP $${Number(v.msrp).toLocaleString()}</div>` : ''}`
+    : `<div class="inv-card-price-call">Call for price</div>`;
+
+  const chips = [v.color, v.category, v.stock_number ? `#${v.stock_number}` : null]
+    .filter(Boolean).map(c => `<span class="inv-card-chip">${c}</span>`).join('');
+
+  return `<a href="/vehicle?id=${v.id}" class="inv-card">
+    <div class="inv-card-img">
+      ${img}
+      <div class="inv-card-badges">
+        <span class="inv-card-badge ${cBadge.split(' ')[0]}">${cBadge.split(' ').slice(1).join(' ')}</span>
+        ${sBadge ? `<span class="inv-card-badge ${sBadge.split(' ')[0]}">${sBadge.split(' ').slice(1).join(' ')}</span>` : ''}
+      </div>
+    </div>
+    <div class="inv-card-body">
+      <div class="inv-card-year">${v.make}</div>
+      <div class="inv-card-title">${v.year} ${v.model}</div>
+      ${v.trim ? `<div class="inv-card-trim">${v.trim}</div>` : ''}
+      <div class="inv-card-meta">${chips}</div>
+      ${priceHtml}
+      <div class="inv-card-btn">View Details</div>
+    </div>
+  </a>`;
+}
+
+/* ── Pagination ── */
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PER_PAGE);
+  const pag   = document.getElementById('inv-pagination');
+  if (total <= 1) { pag.innerHTML = ''; return; }
+
+  let html = `<button class="inv-page-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>&#8249;</button>`;
+  for (let i = 1; i <= total; i++) {
+    if (total > 7 && i > 2 && i < total - 1 && Math.abs(i - page) > 1) {
+      if (i === 3 || i === total - 2) html += `<span style="color:rgba(255,255,255,0.3);padding:0 4px;">…</span>`;
+      continue;
+    }
+    html += `<button class="inv-page-btn${i===page?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="inv-page-btn" onclick="goPage(${page+1})" ${page===total?'disabled':''}>&#8250;</button>`;
+  pag.innerHTML = html;
+}
+
+function goPage(n) {
+  page = n;
+  renderGrid();
+  document.getElementById('inv-controls').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Event listeners ── */
+document.getElementById('inv-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.inv-tab');
+  if (!btn) return;
+  document.querySelectorAll('.inv-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  activeTab = btn.dataset.cond;
+  // update URL hash for bookmarking
+  history.replaceState(null, '', activeTab === 'all' ? '/inventory' : `/inventory#${activeTab}`);
+  applyFilters();
+});
+
+/* brand change also refreshes model dropdown */
+document.getElementById('inv-brand').addEventListener('change', e => {
+  updateModelDropdown(e.target.value);
+  applyFilters();
+});
+
+['inv-search','inv-model','inv-category','inv-year','inv-price','inv-sort'].forEach(id => {
+  document.getElementById(id).addEventListener('input', applyFilters);
+});
+
+/* ── Handle hash on load ── */
+const hash = window.location.hash.replace('#','');
+if (['new','used','clearance'].includes(hash)) {
+  activeTab = hash;
+  document.querySelectorAll('.inv-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.cond === hash);
+  });
+}
+
+fetchInventory();
+</script>
+</body>
+</html>
