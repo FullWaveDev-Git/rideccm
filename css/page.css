@@ -200,6 +200,17 @@
   color: var(--red);
 }
 
+.staff-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid var(--border-red);
+  margin: 0 auto 0.75rem;
+  display: block;
+}
+
 .staff-name {
   font-size: 0.9rem;
   font-weight: 600;

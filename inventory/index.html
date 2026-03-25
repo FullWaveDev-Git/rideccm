@@ -35,9 +35,16 @@
       .inv-controls-inner { gap: 0.6rem; }
       .inv-filter-row { gap: 0.5rem; }
       .inv-tabs { width: 100%; justify-content: space-between; }
-      .inv-tab  { flex: 1; text-align: center; padding: 0.45rem 0.5rem; }
+      .inv-tab  { flex: 1; text-align: center; padding: 0.45rem 0.5rem; font-size: 0.72rem; }
+      .inv-tab .count { display: block; }
       .inv-search { min-width: 0; max-width: 100%; width: 100%; flex: 1 1 100%; }
-      .inv-select { flex: 1; min-width: 0; }
+      /* Sort takes full width on its own row */
+      #inv-sort { width: 100%; flex: 1 1 100%; }
+      /* Filter selects: 2-column grid */
+      .inv-filter-row:last-child { display: grid; grid-template-columns: 1fr 1fr; }
+      .inv-filter-row:last-child .inv-select { width: 100%; min-width: 0; }
+      /* Clear button spans both columns */
+      .inv-clear-btn { grid-column: 1 / -1; width: 100%; text-align: center; }
     }
 
     /* ── Results bar ── */

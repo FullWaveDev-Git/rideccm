@@ -47,6 +47,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -193,10 +194,10 @@ p { color: var(--text-muted); line-height: 1.75; }
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
 [data-animate="fade-left"] {
-  transform: translateX(40px);
+  transform: translateX(30px);
 }
 [data-animate="fade-right"] {
-  transform: translateX(-40px);
+  transform: translateX(-30px);
 }
 [data-animate].in-view {
   opacity: 1;
@@ -312,8 +313,7 @@ p { color: var(--text-muted); line-height: 1.75; }
   z-index: 100;
 }
 
-.dropdown.open .dropdown-menu,
-.dropdown:focus-within .dropdown-menu {
+.dropdown.open .dropdown-menu {
   display: block;
   animation: dropIn 0.2s ease forwards;
 }
@@ -1375,12 +1375,12 @@ a.footer-col ul li:hover,
     content: '';
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.65);
     z-index: -1;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition);
+    will-change: opacity;
   }
   .nav-menu.open::before {
     opacity: 1;
