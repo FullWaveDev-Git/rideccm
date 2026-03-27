@@ -59,6 +59,11 @@
   margin-bottom: 1rem;
 }
 
+/* Center brand logos in hero (global img { display:block } prevents text-align from working) */
+.page-hero-content img {
+  margin: 0 auto;
+}
+
 .page-hero p {
   font-size: 1rem;
   color: var(--text-muted);
