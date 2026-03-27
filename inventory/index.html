@@ -510,14 +510,21 @@ document.getElementById('inv-brand').addEventListener('change', e => {
   document.getElementById(id).addEventListener('input', applyFilters);
 });
 
-/* ── Handle hash on load ── */
-const hash = window.location.hash.replace('#','');
-if (['new','used','clearance'].includes(hash)) {
-  activeTab = hash;
-  document.querySelectorAll('.inv-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.cond === hash);
-  });
+/* ── Handle hash (on load + when already on page) ── */
+function applyHashFilter() {
+  const hash = window.location.hash.replace('#','');
+  if (['new','used','clearance'].includes(hash)) {
+    activeTab = hash;
+    document.querySelectorAll('.inv-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.cond === hash);
+    });
+    applyFilters();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
+
+applyHashFilter();
+window.addEventListener('hashchange', applyHashFilter);
 
 fetchInventory();
 </script>
