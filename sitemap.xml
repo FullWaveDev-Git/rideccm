@@ -3,124 +3,124 @@
 
   <!-- Core Pages -->
   <url>
-    <loc>https://www.rideccm.com/</loc>
+    <loc>https://rideccm.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/inventory</loc>
+    <loc>https://rideccm.vercel.app/inventory</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/promotions</loc>
+    <loc>https://rideccm.vercel.app/promotions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/services</loc>
+    <loc>https://rideccm.vercel.app/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/financing</loc>
+    <loc>https://rideccm.vercel.app/financing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/about</loc>
+    <loc>https://rideccm.vercel.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/contact</loc>
+    <loc>https://rideccm.vercel.app/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/parts</loc>
+    <loc>https://rideccm.vercel.app/parts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/schedule-service</loc>
+    <loc>https://rideccm.vercel.app/schedule-service</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/get-a-quote</loc>
+    <loc>https://rideccm.vercel.app/get-a-quote</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/events</loc>
+    <loc>https://rideccm.vercel.app/events</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Brand Pages -->
   <url>
-    <loc>https://www.rideccm.com/brands/yamaha</loc>
+    <loc>https://rideccm.vercel.app/brands/yamaha</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/polaris</loc>
+    <loc>https://rideccm.vercel.app/brands/polaris</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/kawasaki</loc>
+    <loc>https://rideccm.vercel.app/brands/kawasaki</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/ktm</loc>
+    <loc>https://rideccm.vercel.app/brands/ktm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/can-am</loc>
+    <loc>https://rideccm.vercel.app/brands/can-am</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/triumph</loc>
+    <loc>https://rideccm.vercel.app/brands/triumph</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/slingshot</loc>
+    <loc>https://rideccm.vercel.app/brands/slingshot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/brands/suzuki</loc>
+    <loc>https://rideccm.vercel.app/brands/suzuki</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Sitemap Page -->
   <url>
-    <loc>https://www.rideccm.com/sitemap</loc>
+    <loc>https://rideccm.vercel.app/sitemap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <!-- Blog -->
   <url>
-    <loc>https://www.rideccm.com/blog</loc>
+    <loc>https://rideccm.vercel.app/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/blog/best-motorcycle-roads-southwest-ohio</loc>
+    <loc>https://rideccm.vercel.app/blog/best-motorcycle-roads-southwest-ohio</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/blog/spring-riding-season-ohio-2026</loc>
+    <loc>https://rideccm.vercel.app/blog/spring-riding-season-ohio-2026</loc>
     <lastmod>2026-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -128,47 +128,47 @@
 
   <!-- Service Areas -->
   <url>
-    <loc>https://www.rideccm.com/service-areas</loc>
+    <loc>https://rideccm.vercel.app/service-areas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/cincinnati</loc>
+    <loc>https://rideccm.vercel.app/service-areas/cincinnati</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/dayton</loc>
+    <loc>https://rideccm.vercel.app/service-areas/dayton</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/columbus</loc>
+    <loc>https://rideccm.vercel.app/service-areas/columbus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/chillicothe</loc>
+    <loc>https://rideccm.vercel.app/service-areas/chillicothe</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/xenia</loc>
+    <loc>https://rideccm.vercel.app/service-areas/xenia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/springfield</loc>
+    <loc>https://rideccm.vercel.app/service-areas/springfield</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/washington-court-house</loc>
+    <loc>https://rideccm.vercel.app/service-areas/washington-court-house</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.rideccm.com/service-areas/hillsboro</loc>
+    <loc>https://rideccm.vercel.app/service-areas/hillsboro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
