@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.rideccm.com/sitemap.xml
+Sitemap: https://rideccm.vercel.app/sitemap.xml
