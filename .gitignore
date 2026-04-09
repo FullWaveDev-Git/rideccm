@@ -1,1 +1,4 @@
 .vercel
+.github/scripts/node_modules/
+.github/scripts/package.json
+.github/scripts/package-lock.json
