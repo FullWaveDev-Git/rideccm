@@ -235,7 +235,7 @@ p { color: var(--text-muted); line-height: 1.75; }
 
 /* Logo */
 .nav-logo img {
-  height: 156px;
+  height: 104px;
   width: auto;
   transition: opacity var(--transition);
 }
